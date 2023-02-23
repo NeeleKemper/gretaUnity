@@ -39,11 +39,9 @@ namespace audioElements
                     if (audioElement.getFrameNumber() > audioElementList[i].getFrameNumber())
                     {
                         audioElementList.Insert(i + 1, audioElement);
-                        break;
                     }
                     else {
                         audioElementList[i] = audioElement;
-                        break;
                     }
 
                 }
