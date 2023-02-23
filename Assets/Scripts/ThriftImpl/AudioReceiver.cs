@@ -1,4 +1,6 @@
 using audioElements;
+using System.Globalization;
+
 using thrift.gen_csharp;
 using thrift.services;
 using time;
@@ -47,7 +49,7 @@ namespace thriftImpl
             m.Properties.TryGetValue("sampleRate", out s_sampleRate);
             if (s_sampleRate != null)
             {
-                float.TryParse(s_sampleRate, out f_sampleRate);
+                float.TryParse(s_sampleRate, NumberStyles.Any, CultureInfo.InvariantCulture, out f_sampleRate);
             }
             int sampleRate = (int)f_sampleRate;
             //EB : I need to recover the raw data buffer from the message and to create an AudioElement that contains such a buffer

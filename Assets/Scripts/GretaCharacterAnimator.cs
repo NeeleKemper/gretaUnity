@@ -236,7 +236,6 @@ public class GretaCharacterAnimator : MonoBehaviour
             /*EB : START TEST FOR AUDIO BUFFER*/
             if (audioFilePlayer.isNewAudio() || audioReceiver.isNewAudio())
             {   
-                Debug.Log("new Audio: "+ currentAudio.getSampleRate() + "; " + currentAudio.rawData.Length);
                 //EB : I reconstructed the short values computed by cereproc from the byte buffer sent by VIB
                 // and used this short value to fill the float buffer needed by the audio clip
                 if (currentAudio.getSampleRate()>0 && currentAudio.rawData.Length > 0)
@@ -251,9 +250,8 @@ public class GretaCharacterAnimator : MonoBehaviour
                     // For Mary you need to set the frequency to 16000. This is ugly, really!
                     // It should be a input and not hard coded. The problem is that the thrift message doesn't
                     // contain the information at all and I don't want to put my hands in that part of your code.
-                    int customSamplingRate = 16000; // currentAudio.getSampleRate()
                     Destroy(_currentAudioSource.clip);
-                    _currentAudioSource.clip = AudioClip.Create("text", len, 1, customSamplingRate, false);
+                    _currentAudioSource.clip = AudioClip.Create("text", len, 1,  currentAudio.getSampleRate(), false);
                     float[] buffer = new float[len];
                     for (int iPCM = 44; iPCM < len; iPCM++)
                     {
